@@ -1,3 +1,72 @@
+# House Marketplace Project 
+---
+- ##  House Marketplace Project Start
+- [x] Qwik-Setup & FireBase Config
+
+- [x] Enable Authentication & Create Rules
+##### Setting rules in Common Expression Language on Firebase
+###### FIRESTORE RULES
+
+```
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Listings
+    match /listings/{listing} {
+    	allow read;
+      allow create: if request.auth != null && request.resource.data.imgUrls.size() < 7;
+    	allow delete: if resource.data.userRef == request.auth.uid;
+    }
+   
+    // Users
+    match /users/{user} {
+    	allow read;
+    	allow create;
+    	allow update: if request.auth.uid == user
+    }
+  }
+}
+```
+
+###### STORAGE RULES
+```
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read;
+      allow write: if
+      request.auth != null &&
+      request.resource.size < 2 * 1024 * 1024 && //2MB
+      request.resource.contentType.matches('image/.*')
+    }
+  }
+}
+```
+- [x] Dummy Data & Indexes
+- [x] Pages & Routes
+- [x] Navbar Component
+---
+- ## Firebase Authentication & Profile
+
+
+- [ ] 1) Sign In & Sign Up Form  
+- [ ] 2) Register User
+- [ ] 3) Save User To Firerstore
+- [ ] 4) User Sign In
+- [ ] 5) Alerts With React Toastify
+- [ ] 6) User Logout
+- [ ] 7) Display & Update User Details
+- [ ] 8) PrivateRoute Component & useAuthStatus Hook
+- [ ] 9) Forgot Password
+- [ ] 10) Google OAuth
+
+
+
+    
+---
 # Qwik City App ⚡️
 
 - [Qwik Docs](https://qwik.builder.io/)

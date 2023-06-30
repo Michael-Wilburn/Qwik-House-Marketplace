@@ -1,25 +1,22 @@
 import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import { app } from '../config/firebase.config'
 
 export default component$(() => {
   return (
     <>
-      <h1>Hi 👋</h1>
-      <p>
-        Can't wait to see what you build with qwik!
-        <br />
-        Happy coding.
-      </p>
+      <h1>explore</h1>
+      <button onClick$={() => console.log(app)}>greet!</button>
     </>
   );
 });
 
 export const head: DocumentHead = {
-  title: 'Welcome to Qwik',
+  title: 'House Marketplace',
   meta: [
     {
-      name: 'description',
-      content: 'Qwik site description',
+      name: 'House Marketplace App',
+      content: 'Qwik app',
     },
   ],
 };

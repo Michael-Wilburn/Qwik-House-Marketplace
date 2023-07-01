@@ -218,6 +218,8 @@ button {
   top: -4%;
   right: 1%;
   padding: 1rem;
+  width: fit-content;
+  height: fit-content;
 }
 
 .forgotPasswordLink {

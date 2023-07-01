@@ -1,10 +1,14 @@
 import { $, component$, useSignal, useStore } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { app } from '../../config/firebase.config.js'
+import { Link, useNavigate } from '@builder.io/qwik-city';
 import { ArrowRightIcon } from '~/assets/icons/authenticationIcons';
 import VisibilityIcon from '~/assets/svg/visibilityIcon.svg';
 
+
 export default component$(() => {
     const showPassword = useSignal(false);
+    const navigate = useNavigate();
     const formData = useStore({
         name: '',
         email: '',
@@ -25,6 +29,25 @@ export default component$(() => {
         }
     });
 
+    const onSubmit = $(async () => {
+        try {
+            const auth = getAuth(app);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            updateProfile(user, {
+                displayName: name
+            })
+
+            navigate('/')
+
+        } catch (error) {
+            console.log('ERROR VIEJA')
+            console.log(error)
+        }
+
+    })
+
     return (
         <>
             <div class="pageContainer">
@@ -33,7 +56,7 @@ export default component$(() => {
                         Welcome Back!
                     </p>
                 </header>
-                <form>
+                <form onSubmit$={onSubmit} preventdefault:submit>
                     <input
                         type="text"
                         class="nameInput"

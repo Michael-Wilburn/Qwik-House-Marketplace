@@ -52,7 +52,7 @@ service firebase.storage {
 - ## Firebase Authentication & Profile
 
 
-- [ ] 1) Sign In & Sign Up Form  
+- [x] 1) Sign In & Sign Up Form  
 - [ ] 2) Register User
 - [ ] 3) Save User To Firerstore
 - [ ] 4) User Sign In

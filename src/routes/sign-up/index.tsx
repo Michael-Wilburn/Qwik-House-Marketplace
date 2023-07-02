@@ -1,9 +1,10 @@
 import { $, component$, useSignal, useStore } from '@builder.io/qwik';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { app } from '../../config/firebase.config.js'
+import { app, db } from '../../config/firebase.config.js'
 import { Link, useNavigate } from '@builder.io/qwik-city';
 import { ArrowRightIcon } from '~/assets/icons/authenticationIcons';
 import VisibilityIcon from '~/assets/svg/visibilityIcon.svg';
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
 
 
 export default component$(() => {
@@ -34,15 +35,24 @@ export default component$(() => {
             const auth = getAuth(app);
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-
             updateProfile(user, {
                 displayName: name
             })
 
-            navigate('/')
+            const formDataCopy: {
+                name: string,
+                email: string,
+                password?: string,
+                timestamp?: unknown
+            } = { ...formData }
 
+            delete formDataCopy.password
+            formDataCopy.timestamp = serverTimestamp()
+
+            await setDoc(doc(db, 'users', user.uid), formDataCopy)
+
+            navigate('/')
         } catch (error) {
-            console.log('ERROR VIEJA')
             console.log(error)
         }
 

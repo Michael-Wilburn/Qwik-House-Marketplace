@@ -51,10 +51,9 @@ service firebase.storage {
 ---
 - ## Firebase Authentication & Profile
 
-
 - [x] 1) Sign In & Sign Up Form  
-- [ ] 2) Register User
-- [ ] 3) Save User To Firerstore
+- [x] 2) Register User
+- [x] 3) Save User To Firerstore
 - [ ] 4) User Sign In
 - [ ] 5) Alerts With React Toastify
 - [ ] 6) User Logout

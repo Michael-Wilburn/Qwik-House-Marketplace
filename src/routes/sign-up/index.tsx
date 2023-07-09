@@ -34,6 +34,7 @@ export default component$(() => {
         try {
             const auth = getAuth(app);
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
             const user = userCredential.user;
             updateProfile(user, {
                 displayName: name
@@ -113,7 +114,6 @@ export default component$(() => {
                     Sign In Insted
                 </Link>
             </div >
-
         </>
     );
 });

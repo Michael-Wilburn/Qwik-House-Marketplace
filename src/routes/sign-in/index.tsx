@@ -1,9 +1,12 @@
 import { $, component$, useSignal, useStore } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { app } from '../../config/firebase.config.js'
+import { Link, useNavigate } from '@builder.io/qwik-city';
 import { ArrowRightIcon } from '~/assets/icons/authenticationIcons';
 import VisibilityIcon from '~/assets/svg/visibilityIcon.svg';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export default component$(() => {
+    const navigate = useNavigate()
     const showPassword = useSignal(false);
     const formData = useStore({
         email: '',
@@ -21,6 +24,19 @@ export default component$(() => {
         }
     });
 
+    const onSubmit = $(async () => {
+        try {
+            const auth = getAuth(app)
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+
+            if (userCredential.user) {
+                navigate('/')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
     return (
         <>
             <div class="pageContainer">
@@ -29,7 +45,7 @@ export default component$(() => {
                         Welcome Back!
                     </p>
                 </header>
-                <form>
+                <form onSubmit$={onSubmit} preventdefault:submit>
                     <input
                         type="email"
                         class="emailInput"

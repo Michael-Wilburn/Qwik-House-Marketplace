@@ -34,6 +34,7 @@ export default component$(() => {
             }
         } catch (error) {
             console.log(error)
+            alert("Bad User Credentials")
         }
     })
 

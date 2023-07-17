@@ -17,7 +17,6 @@ export default component$(() => {
       <head>
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
-
         <title>House Marketplace App</title>
         <RouterHead />
       </head>

@@ -54,7 +54,7 @@ export default component$(() => {
 
             navigate('/')
         } catch (error) {
-            console.log(error)
+            alert('Something went wrong with registration ')
         }
 
     })

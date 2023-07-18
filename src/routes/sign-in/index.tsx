@@ -4,8 +4,10 @@ import { Link, useNavigate } from '@builder.io/qwik-city';
 import { ArrowRightIcon } from '~/assets/icons/authenticationIcons';
 import VisibilityIcon from '~/assets/svg/visibilityIcon.svg';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { Alert } from '~/components/alert/alert.js';
 
 export default component$(() => {
+    const message = useSignal('');
     const navigate = useNavigate()
     const showPassword = useSignal(false);
     const formData = useStore({
@@ -33,14 +35,17 @@ export default component$(() => {
                 navigate('/')
             }
         } catch (error) {
-            console.log(error)
-            alert("Bad User Credentials")
+            message.value = 'Bad User Credentials';
+            setTimeout(() => {
+                message.value = '';
+            }, 2000);
         }
     })
 
     return (
         <>
             <div class="pageContainer">
+                {message.value !== '' ? <Alert message={message} /> : null}
                 <header>
                     <p class="pageHeader">
                         Welcome Back!

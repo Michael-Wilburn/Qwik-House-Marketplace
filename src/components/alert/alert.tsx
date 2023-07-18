@@ -1,15 +1,16 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import type { Signal } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 
 interface AlertProps {
-    message: string;
+    message: Signal<string>
 }
 
 export const Alert = component$((props: AlertProps) => {
-    const isVisible = useSignal(true);
 
-    setTimeout(() => {
-        isVisible.value = false;
-    }, 3000);
-
-    return isVisible.value ? <div>{props.message}</div> : null;
+    return (
+        <div class="alertError">
+            <span>{props.message}</span>
+        </div>
+    )
 })
+

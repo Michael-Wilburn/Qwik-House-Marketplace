@@ -55,8 +55,8 @@ service firebase.storage {
 - [x] 2) Register User
 - [x] 3) Save User To Firerstore
 - [x] 4) User Sign In
-- [ ] 5) Alerts With React Toastify
-- [ ] 6) User Logout
+- [x] 5) Alerts
+- [x] 6) User Logout
 - [ ] 7) Display & Update User Details
 - [ ] 8) PrivateRoute Component & useAuthStatus Hook
 - [ ] 9) Forgot Password

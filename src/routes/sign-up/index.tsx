@@ -5,9 +5,11 @@ import { Link, useNavigate } from '@builder.io/qwik-city';
 import { ArrowRightIcon } from '~/assets/icons/authenticationIcons';
 import VisibilityIcon from '~/assets/svg/visibilityIcon.svg';
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
+import { Alert } from '~/components/alert/alert.js';
 
 
 export default component$(() => {
+    const message = useSignal('');
     const showPassword = useSignal(false);
     const navigate = useNavigate();
     const formData = useStore({
@@ -54,14 +56,17 @@ export default component$(() => {
 
             navigate('/')
         } catch (error) {
-            alert('Something went wrong with registration ')
+            message.value = 'Something went wrong with the registration';
+            setTimeout(() => {
+                message.value = '';
+            }, 2000);
         }
-
     })
 
     return (
         <>
             <div class="pageContainer">
+                {message.value !== '' ? <Alert message={message} /> : null}
                 <header>
                     <p class="pageHeader">
                         Welcome Back!

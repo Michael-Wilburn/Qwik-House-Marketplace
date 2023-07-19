@@ -57,7 +57,7 @@ service firebase.storage {
 - [x] 4) User Sign In
 - [x] 5) Alerts
 - [x] 6) User Logout
-- [ ] 7) Display & Update User Details
+- [x] 7) Display & Update User Details
 - [ ] 8) PrivateRoute Component & useAuthStatus Hook
 - [ ] 9) Forgot Password
 - [ ] 10) Google OAuth
